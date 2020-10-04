@@ -8,6 +8,7 @@ import { pointWithinRadius, validateLatLng } from './utils';
 import styled from 'styled-components';
 import firebase, { firestore } from './firebase';
 import * as geofirestore from 'geofirestore';
+import Button from './components/Button/Button';
 
 const GeoFirestore = geofirestore.initializeApp(firestore);
 
@@ -135,16 +136,27 @@ function App() {
               />
 
               <ProtestListWrapper>
-                <div>
-                  <Link to="/project-updates/1">
-                    <SiteMessage style={{ backgroundColor: '#6ab04c' }}>
-                      <span style={{ boxShadow: '0 2px 0 0 #fff', fontSize: 19 }}>מה נעשה עכשיו? עדכון פרוייקט #1</span>
-                    </SiteMessage>
-                  </Link>
+                <ListHeader>
+                  <Button color="#6AB2E4" onClick={() => window.location.reload()}>
+                    שינוי כתובת
+                  </Button>
+                </ListHeader>
 
-                  <ProtestList closeProtests={state.protests.close} farProtests={state.protests.far} loading={state.loading} />
-                </div>
-                <Footer />
+                <ListContent>
+                  <div>
+                    <Link to="/project-updates/1">
+                      <SiteMessage style={{ backgroundColor: '#6ab04c' }}>
+                        <span style={{ boxShadow: '0 2px 0 0 #fff', fontSize: 19 }}>מה נעשה עכשיו? עדכון פרוייקט #1</span>
+                      </SiteMessage>
+                    </Link>
+
+                    <ProtestList closeProtests={state.protests.close} farProtests={state.protests.far} loading={state.loading} />
+                  </div>
+                </ListContent>
+
+                <ListFooter>
+                  <Footer />
+                </ListFooter>
               </ProtestListWrapper>
             </HomepageWrapper>
             <Modal
@@ -279,6 +291,22 @@ const ProtestListWrapper = styled.div`
     padding: 0 15px;
     max-height: calc(100vh - 60px);
   }
+`;
+
+const ListHeader = styled.div`
+  display: flex;
+  padding: 8px 0 8px 0;
+  justify-content: center;
+`;
+
+const ListContent = styled.div`
+  flex: 1;
+  padding: 8px 0 8px 0;
+`;
+
+const ListFooter = styled.div`
+  display: flex;
+  justify-content: flex-start;
 `;
 
 export default App;

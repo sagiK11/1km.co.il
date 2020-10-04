@@ -30,7 +30,7 @@ export async function createPendingProtest(params) {
 
     // if (verification.success) {
     const [lat, lng] = coords;
-    const geocollection = GeoFirestore.collection('pending_protests');
+    const geocollection = GeoFirestore.collection('protests');
 
     const request = geocollection.add({
       displayName,
@@ -75,7 +75,7 @@ export function createProtest(params) {
 
 export async function archivePendingProtest(protestId) {
   try {
-    const request = await firestore.collection('pending_protests').doc(protestId).update({
+    const request = await firestore.collection('protests').doc(protestId).update({
       archived: true,
     });
     console.log(request); // <-- Why is this undefined yet the operation successful?
